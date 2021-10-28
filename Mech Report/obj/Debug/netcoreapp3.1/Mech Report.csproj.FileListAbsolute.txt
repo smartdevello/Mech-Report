@@ -1,0 +1,105 @@
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\App.g.cs
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report_MarkupCompile.cache
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report_MarkupCompile.lref
+D:\My Work\2021\6\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.exe
+D:\My Work\2021\6\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.deps.json
+D:\My Work\2021\6\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.runtimeconfig.json
+D:\My Work\2021\6\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.runtimeconfig.dev.json
+D:\My Work\2021\6\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.dll
+D:\My Work\2021\6\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.pdb
+D:\My Work\2021\6\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+D:\My Work\2021\6\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+D:\My Work\2021\6\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\My Work\2021\6\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\My Work\2021\6\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\MainWindow.baml
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.g.resources
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.AssemblyInfoInputs.cache
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.AssemblyInfo.cs
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.CoreCompileInputs.cache
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.CopyComplete
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.dll
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.pdb
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.genruntimeconfig.cache
+D:\My Work\2021\6\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\CsvHelper.dll
+D:\My Work\2021\6\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.AssemblyReference.cache
+E:\KKY\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.exe
+E:\KKY\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.deps.json
+E:\KKY\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.runtimeconfig.json
+E:\KKY\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.runtimeconfig.dev.json
+E:\KKY\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.dll
+E:\KKY\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.pdb
+E:\KKY\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\CsvHelper.dll
+E:\KKY\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+E:\KKY\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+E:\KKY\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+E:\KKY\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\KKY\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\App.g.cs
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report_MarkupCompile.cache
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report_MarkupCompile.lref
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\MainWindow.baml
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.g.resources
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.GeneratedMSBuildEditorConfig.editorconfig
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.AssemblyInfoInputs.cache
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.AssemblyInfo.cs
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.CoreCompileInputs.cache
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.CopyComplete
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.dll
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.pdb
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.genruntimeconfig.cache
+E:\KKY\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.AssemblyReference.cache
+D:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.exe
+D:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.deps.json
+D:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.runtimeconfig.json
+D:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.runtimeconfig.dev.json
+D:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.dll
+D:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.pdb
+D:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\CsvHelper.dll
+D:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+D:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+D:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.AssemblyReference.cache
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\App.g.cs
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report_MarkupCompile.cache
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report_MarkupCompile.lref
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\MainWindow.baml
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.g.resources
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.AssemblyInfoInputs.cache
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.AssemblyInfo.cs
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.CoreCompileInputs.cache
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.CopyComplete
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.dll
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.pdb
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.genruntimeconfig.cache
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.AssemblyReference.cache
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\App.g.cs
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report_MarkupCompile.cache
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report_MarkupCompile.lref
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.dll
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.pdb
+E:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.exe
+E:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.deps.json
+E:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.runtimeconfig.json
+E:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.runtimeconfig.dev.json
+E:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.dll
+E:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Mech Report.pdb
+E:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\CsvHelper.dll
+E:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+E:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+E:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+E:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\My Work\2021\8\Mech Report\Mech Report\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\MainWindow.baml
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.g.resources
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.AssemblyInfoInputs.cache
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.AssemblyInfo.cs
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.CoreCompileInputs.cache
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.CopyComplete
+E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.genruntimeconfig.cache
