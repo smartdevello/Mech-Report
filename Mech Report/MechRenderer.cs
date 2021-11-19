@@ -5,6 +5,7 @@ using System.Linq;
 using System.Drawing.Drawing2D;
 using System.Text;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Mech_Report
 {
@@ -25,6 +26,10 @@ namespace Mech_Report
         Random rnd = new Random();
         Image crossImg = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "cross.png"));
         Image logoImg = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "logo.png"));
+        Image warningImg = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "warning.png"));
+        Image red_fingerImg = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "red_finger.png"));
+        Image yello_fingerImg = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "yellow_finger.png"));
+
         public MechRenderer(int width, int height)
         {
             this.width = width;
@@ -191,91 +196,198 @@ namespace Mech_Report
             drawCenteredString("ACTUAL", new Rectangle(320, 930, 250, 30), Brushes.Black);
             //drawString(new Point(480, 930), "ACTUAL");
 
+            //Draw Pie
 
-            //Draw Bar Chart            
-            drawCenteredString("BASE LINE", new Rectangle(320, 530, 250, 30), Brushes.Black);
+            nextAngle = 270.0f;
+            Dictionary<string, int> left_info_dic = new Dictionary<string, int>();
+            foreach(var item in data)
+            {
+                if (string.IsNullOrEmpty(item.left_info)) continue;
+                string[] words = item.left_info.Split(' ');
+                if (words.Length != 2) continue;
+                if (!Regex.IsMatch(words[1], @"^[a-zA-Z]+$")) continue;
+                string key = words[1];
+                if (key.Length>=2) key = words[1].Substring(0, 2);
+                if (left_info_dic.ContainsKey(key))
+                {
+                    left_info_dic[key]++;
+                } else left_info_dic[key] = 1;
 
-            drawLine(new Point(350, 500), new Point(350, 300), Color.Gray);
-            drawString(new Point(345, 295), "0", 8);
+            }
 
-            drawLine(new Point(420, 500), new Point(420, 300), Color.Gray);
-            drawString(new Point(400, 295), "5000%", 8);
+            int tot_left_info = 0;
+            for (int i  = 0; i< left_info_dic.Count(); i++)
+            {
+                tot_left_info += left_info_dic.ElementAt(i).Value;
+            }
+            var sorted_left_info_dict = left_info_dic.OrderByDescending(o => o.Value);
 
+            if (tot_left_info != 0)
+            {
+                nextAngle = 270.0f; angle = 0;
+                Color[] colors = new Color[]
+                {
+                        Color.BlueViolet,
+                        Color.DarkSlateBlue,
+                        Color.SlateBlue,
+                        Color.MediumSlateBlue,
+                        Color.MediumPurple
+                };
+                int explainerX = 320, expainerY = 280;
+                for (int i = 0; i< Math.Min(sorted_left_info_dict.Count(), 5); i++)
+                {
+                    angle = 360.0f * sorted_left_info_dict.ElementAt(i).Value / (float)tot_left_info;
+                    drawPie(colors[i], new Point(320, 550), new Size(200, 200), nextAngle, angle);
+                    nextAngle += angle;
 
-            drawLine(new Point(490, 500), new Point(490, 300), Color.Gray);
-            drawString(new Point(470, 295), "10000%", 8);
+                    if (i % 2 == 0)
+                    {
+                        explainerX = 320;
+                    }
+                    else explainerX = 470;
 
-            drawLine(new Point(560, 500), new Point(560, 300), Color.Gray);
-            drawString(new Point(530, 295), "15000%(+)", 8);
+                    fillRectangle(colors[i], new Rectangle(explainerX, expainerY, 15, 15));
+                    percentage = sorted_left_info_dict.ElementAt(i).Value * 100.0f / (float)tot_left_info;
+                    drawString(new Point(explainerX + 20, expainerY), sorted_left_info_dict.ElementAt(i).Key +  " " + Math.Round(percentage, 2).ToString() + "%", 11);
 
-
-            //70px per 25 percent
-            //drawString(new Point(320, 590), "NF", 10);
-
-            //drawString(new Point(320, 540), "MF", 10);
-
-            List<Calibration> temp1 = new List<Calibration>();
-            List<Calibration> temp2 = new List<Calibration>();
-
-            double avg1 = 0, avg2 = 0;
-            drawString(new Point(320, 460), "HF", 10);
-            temp1 = OoC.Where(o => o.result == "HF").ToList();
-            if (temp1.Count > 0)
-                avg1 = temp1.Average(o => o.deviation);
-            else avg1 = 0;
-
-            if (avg1 > 15000) avg1 = 15000;
-            fillRectangle(Color.Red, new Rectangle(350, 470, (int)(70 / 5000.0 * avg1), 40));
-
-            drawString(new Point(320, 370), "DF", 10);
-            temp2 = OoC.Where(o => o.result == "DF").ToList();
-            if (temp2.Count > 0)
-                avg2 = temp2.Average(o => o.deviation);
-            else avg2 = 0;
-            if (avg2 > 15000) avg2 = 15000;
-            fillRectangle(Color.Pink, new Rectangle(350, 380, (int)(70 / 5000.0 * avg2), 40));
-
+                    if (i%2 == 1)
+                    {
+                        expainerY -= 30;
+                    }
+                    
+                }
+            }
 
 
             if (OoC.Count > 0)
             {
                 //Draw OoC
                 //drawString(new Point(390, 270), "OoC");
-                drawCenteredString("OoC", new Rectangle(320, 220, 200, 30), Brushes.Black);
+                drawCenteredString("OoC", new Rectangle(320, 210, 200, 30), Brushes.Black);
                 drawOoC();
             }
 
+            //Draw warning
+
+            drawRectangle(new Pen(Color.Red, 5), new Rectangle(600, 120, 300, 140));
+            drawImg(warningImg, new Point(620, 100), new Size(75, 75));
+            drawString(Color.Black, new Point(700, 100), "WARNING:", 18, true);            
+            drawString(Color.Black, new Point(700, 60), "EV-MF target 90.5%\nEV-NF target 1.33%", 10, true);
+            drawString(Color.Red, new Point(620, 10), "MF90.05/1.33DUP/EDNF8.34", 11, true);
+             
+            int iconXcood = 900;
+            
+            percentage = NF.Count * 100.0f / (float)data.Count;
+            string msg = "";
+
+            if (percentage >= 1.33)
+            {
+                drawImg(yello_fingerImg, new Point(iconXcood, 100), new Size(100, 100));
+                msg = string.Format("{0}%\nNF\nDetected", Math.Round(percentage, 2).ToString());
+                drawCenteredString(msg, new Rectangle(iconXcood + 100, 100, 100, 100), Brushes.Black, 12);
+                iconXcood += 230;
+            }
+
+            percentage = MF.Count * 100.0f / (float)data.Count;
+            if (percentage <=90.5)
+            {
+                drawImg(yello_fingerImg, new Point(iconXcood, 100), new Size(100, 100));
+                msg = string.Format("{0}%\nMF\nDetected", Math.Round(percentage, 2).ToString());
+                drawCenteredString(msg, new Rectangle(iconXcood + 100, 100, 100, 100), Brushes.Black, 12);
+                iconXcood += 230;
+            }
+
+            percentage = NF.Count * 100.0f / (float)data.Count;
+
+            if (percentage >= 1.33)
+            {
+                drawImg(red_fingerImg, new Point(iconXcood, 100), new Size(100, 100));
+                //msg = "PREDETERMINED\nBALLOT\nRHYTHM\nDETECTED";
+                msg = string.Format("{0}%\nDUPE\nRATE?", Math.Round(percentage, 2).ToString());
+                drawCenteredString(msg, new Rectangle(iconXcood + 90, 100, 100, 100), Brushes.Black, 12);
+                drawCenteredString(NF.Count().ToString(), new Rectangle(iconXcood + 160, 100, 100, 100), Brushes.Black, 25);
+                iconXcood += 250;
+            }
+
+            var sorted_printers = printers.OrderByDescending(o => o.Value);
+            Dictionary<int, int> most_occuring_printers = new Dictionary<int, int>();
+            for (int i = 0; i < sorted_printers.Count(); i++)
+            {
+                int count = sorted_printers.ElementAt(i).Value;
+                if (most_occuring_printers.ContainsKey(count)) most_occuring_printers[count]++;
+                else most_occuring_printers[count] = 1;
+            }
+            var sorted_recurring_printers = most_occuring_printers.OrderByDescending(o => o.Value);
 
 
+            if (sorted_recurring_printers.Count() > 0)
+            {
+                percentage = sorted_recurring_printers.ElementAt(0).Value / (float)sorted_printers.Count();
+                if (sorted_recurring_printers.Count() > 1)
+                {
+                    percentage+= sorted_recurring_printers.ElementAt(1).Value / (float)sorted_printers.Count();
+                }
+
+                if (percentage >= 0.5)
+                {
+                    drawImg(red_fingerImg, new Point(iconXcood, 100), new Size(100, 100));
+                    msg = "PREDETERMINED\nBALLOT\nRHYTHM\nDETECTED";
+                    drawCenteredString(msg, new Rectangle(iconXcood + 100, 100, 170, 100), Brushes.Black, 10);
+                    iconXcood += 300;
+
+                    percentage = sorted_recurring_printers.ElementAt(0).Value * 100 / (float)sorted_printers.Count();
+                    drawCenteredString(string.Format("{0}%", Math.Round(percentage, 0)), new Rectangle(iconXcood, 100, 150, 50), Brushes.Black, 27);
+
+                    if (sorted_recurring_printers.Count() > 1)
+                    {
+                        percentage = sorted_recurring_printers.ElementAt(1).Value * 100 / (float)sorted_printers.Count();
+                        drawCenteredString(string.Format("/{0}%", Math.Round(percentage, 0)), new Rectangle(iconXcood, 50, 150, 50), Brushes.Black, 23);
+                    }
+                        
+
+                }
+            }
 
             //Draw Printers
 
-            var sorted_printers = printers.OrderByDescending(o => o.Value);
             int height_gap = 40;
-            int width_gap = 270;
-            int gapCount = printers.Count() / 20;
-            if (printers.Count() % 20 != 0) gapCount++;
+            int width_gap = 300;
+            int gapCount = printers.Count() / 17;
+            if (printers.Count() % 17 != 0) gapCount++;
 
 
-            drawCenteredString("REPRESENTATION", new Rectangle(550, 950, 270 * Math.Min(gapCount, 5), 30), Brushes.Black);
-            string msg = sorted_printers.Count().ToString();
+            drawCenteredString("REPRESENTATION", new Rectangle(550, 930, 270 * Math.Min(gapCount, 5), 30), Brushes.Black);
+            msg = sorted_printers.Count().ToString();
             if (gapCount > 5)
             {
-                int currentPrinterCnt = Math.Min(sorted_printers.Count(), currentChartIndex * 100 + 100) - currentChartIndex * 100;
+                int currentPrinterCnt = Math.Min(sorted_printers.Count(), currentChartIndex * 85 + 85) - currentChartIndex * 85;
                 msg = string.Format("{0} of {1}", currentPrinterCnt, sorted_printers.Count());
             }
-            drawCenteredString(msg, new Rectangle(550, 920, 270 * Math.Min(gapCount, 5), 100), Brushes.Red, 40);
-            drawCenteredString("HF ALERT-Precint", new Rectangle(600, 840, 200, 40), Brushes.Red, 13);
+
+            drawCenteredString(msg, new Rectangle(550, 900, 270 * Math.Min(gapCount, 5), 100), Brushes.Red, 40);
+            drawCenteredString("HF ALERT-Precint", new Rectangle(620, 840, 200, 40), Brushes.Red, 13);
 
             int len = sorted_printers.Count();
-            for (int i = currentChartIndex * 100; i < Math.Min(sorted_printers.Count(), currentChartIndex * 100 + 100); i++)
+            for (int i = currentChartIndex * 85; i < Math.Min(sorted_printers.Count(), currentChartIndex * 85 + 85); i++)
             {
-                int j = i % 100;
-                drawString(new Point(600 + width_gap * (j / 20), 800 - height_gap * (j % 20)), sorted_printers.ElementAt(i).Key, 8);
+                int j = i % 85;
+                drawString(new Point(620 + width_gap * (j / 17), 800 - height_gap * (j % 17)), sorted_printers.ElementAt(i).Key, 8);
                 percentage = sorted_printers.ElementAt(i).Value * 100 / (float)data.Count;
-                drawPercentageLine(percentage, 750 + width_gap * (j / 20), 800 - height_gap * (j % 20));
+
+                int count = sorted_printers.ElementAt(i).Value;
+                if (count == sorted_recurring_printers.ElementAt(0).Key)
+                {
+                    drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), Color.Red);
+                } else if (sorted_recurring_printers.Count() >=2 && count == sorted_recurring_printers.ElementAt(1).Key)
+                {
+                    drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), Color.Aqua);
+                } else if (sorted_recurring_printers.Count()>=3 && count == sorted_recurring_printers.ElementAt(2).Key)
+                {
+                    drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), Color.Blue);
+                }
+                else drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), Color.Black);
             }
-            drawCenteredString(data.Count().ToString(), new Rectangle(800 + width_gap * (Math.Min(gapCount, 5) - 1), 100, width_gap, 100), Brushes.Black, 40);
+            drawCenteredString(data.Count().ToString(), new Rectangle(780 + width_gap * (Math.Min(gapCount, 5) - 1), 100, width_gap, 100), Brushes.Black, 40);
 
         }
         public void drawCenteredString(string content, Rectangle rect, Brush brush , int fontSize = 15)
@@ -305,36 +417,36 @@ namespace Mech_Report
 
             Brush brush = new SolidBrush(Color.Red);
             PointF[] pyramid = new PointF[4];
-            pyramid[0] = new PointF(320, 190);
-            pyramid[1] = new PointF(520, 190);
-            pyramid[2] = new PointF(489, 140);
-            pyramid[3] = new PointF(351, 140);
+            pyramid[0] = new PointF(320, 180);
+            pyramid[1] = new PointF(520, 180);
+            pyramid[2] = new PointF(489, 130);
+            pyramid[3] = new PointF(351, 130);
             fillPolygon(brush, pyramid);
             if (OoC.Count == 0) return;
             int maxOoC = OoC.Max(o => o.deviation);
-            drawCenteredString(string.Format("{0}%", maxOoC), new Rectangle(351, 180, 138, 30), Brushes.White);
-            drawString(new Point(520, 180), "Highest", 10);
+            drawCenteredString(string.Format("{0}%", maxOoC), new Rectangle(351, 170, 138, 30), Brushes.White);
+            drawString(new Point(520, 170), "Highest", 10);
 
             brush = new SolidBrush(Color.FromArgb(255, 87, 87));
-            pyramid[0] = new PointF(354, 135);
-            pyramid[1] = new PointF(486, 135);
-            pyramid[2] = new PointF(454, 85);
-            pyramid[3] = new PointF(386, 85);
+            pyramid[0] = new PointF(354, 125);
+            pyramid[1] = new PointF(486, 125);
+            pyramid[2] = new PointF(454, 75);
+            pyramid[3] = new PointF(386, 75);
             fillPolygon(brush, pyramid);
             int avgOoC = (int)OoC.Average(o => o.deviation);
-            drawCenteredString(string.Format("{0}%", avgOoC), new Rectangle(380, 125, 80, 30), Brushes.White, 10);
-            drawString(new Point(520, 125), "Average", 10);
+            drawCenteredString(string.Format("{0}%", avgOoC), new Rectangle(380, 115, 80, 30), Brushes.White, 10);
+            drawString(new Point(520, 115), "Average", 10);
 
 
             brush = new SolidBrush(Color.FromArgb(255, 102, 196));
-            pyramid[0] = new PointF(389, 80);
-            pyramid[1] = new PointF(451, 80);
-            pyramid[2] = new PointF(420, 30);
-            pyramid[3] = new PointF(420, 30);
+            pyramid[0] = new PointF(389, 70);
+            pyramid[1] = new PointF(451, 70);
+            pyramid[2] = new PointF(420, 20);
+            pyramid[3] = new PointF(420, 20);
             fillPolygon(brush, pyramid);
             int minOoC = (int)OoC.Min(o => o.deviation);
-            drawCenteredString(string.Format("{0}%", minOoC), new Rectangle(389, 80, 62, 20), Brushes.White, 10);
-            drawString(new Point(520, 70), "Lowest", 10);
+            drawCenteredString(string.Format("{0}%", minOoC), new Rectangle(389, 70, 62, 20), Brushes.White, 10);
+            drawString(new Point(520, 60), "Lowest", 10);
 
 
             brush.Dispose();
@@ -348,11 +460,11 @@ namespace Mech_Report
             }
             gfx.FillPolygon(brush, points);
         }
-        private void drawPercentageLine(float percent, int X, int Y)
+        private void drawPercentageLine(float percent, int X, int Y, Color color)
         {
-            fillRectangle(Color.Black, new Rectangle(X, Y, 20, 20));
-            fillRectangle(Color.Black, new Rectangle(X + 80, Y, 20, 20));
-            drawLine(new Point(X, Y - 10), new Point(X + 80, Y - 10), Color.Black, 4);
+            fillRectangle(color, new Rectangle(X, Y, 20, 20));
+            fillRectangle(color, new Rectangle(X + 80, Y, 20, 20));
+            drawLine(new Point(X, Y - 10), new Point(X + 80, Y - 10), color, 4);
             if (percent != 0.0F)
             {
                 drawString(new Point(X + 30, Y + 10), string.Format("{0:F}%", percent), 8);
@@ -498,7 +610,8 @@ namespace Mech_Report
             o = convertCoord(o);
 
             // Create font and brush.
-            Font drawFont = new Font("Arial", font);
+            Font drawFont = new Font("Arial", font); 
+            
             SolidBrush drawBrush = new SolidBrush(color);
 
             gfx.DrawString(content, drawFont, drawBrush, o.X, o.Y);
@@ -507,6 +620,28 @@ namespace Mech_Report
             drawBrush.Dispose();
 
         }
+
+        public void drawString(Color color, Point o, string content, int font = 15, bool bold = false)
+        {
+
+            double px = height / totHeight;
+            o = convertCoord(o);
+
+            // Create font and brush.
+            Font drawFont = null;
+            if (bold) drawFont= new Font("Arial", font, FontStyle.Bold, GraphicsUnit.Point);
+            else drawFont = new Font("Arial", font);
+
+            SolidBrush drawBrush = new SolidBrush(color);
+
+            gfx.DrawString(content, drawFont, drawBrush, o.X, o.Y);
+
+            drawFont.Dispose();
+            drawBrush.Dispose();
+
+        }
+
+
         public void fillRectangle(Color color, Rectangle rect)
         {
             rect.Location = convertCoord(rect.Location);

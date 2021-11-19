@@ -110,8 +110,8 @@ namespace Mech_Report
         private void drawNextChart(object sender, RoutedEventArgs e)
         {
             int printerCount = mechRenderer.getPrintersCount();
-            int chartCount = printerCount / 100;
-            if (printerCount % 100 != 0) chartCount++;
+            int chartCount = printerCount / 85;
+            if (printerCount % 85 != 0) chartCount++;
 
             currentChartIndex++;
 
@@ -168,10 +168,10 @@ namespace Mech_Report
             }            
 
             int printerCount = mechRenderer.getPrintersCount();
-            if (printerCount != 0 && printerCount > 20)
+            if (printerCount != 0 && printerCount > 17)
             {
-                int gapCount = printerCount / 20;
-                if (printerCount%20 != 0) gapCount++;
+                int gapCount = printerCount / 17;
+                if (printerCount% 17 != 0) gapCount++;
 
                 if (gapCount > 5)
                 {
@@ -181,6 +181,7 @@ namespace Mech_Report
                     gapCount = 5;
                 }
                 Application.Current.MainWindow.Width = 600 + 270 * gapCount;
+                csvFilepath.Width = 1000;
             }
 
             mechRenderer.setRenderSize((int)myCanvas.ActualWidth, (int)myCanvas.ActualHeight);

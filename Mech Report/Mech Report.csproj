@@ -6,7 +6,7 @@
     <RootNamespace>Mech_Report</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>hnet.com-image (3).ico</ApplicationIcon>
-    <Version>3.9</Version>
+    <Version>5.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

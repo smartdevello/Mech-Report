@@ -16,8 +16,12 @@ namespace Mech_Report
         [Name("Name")]
         public string name { get; set; }
 
-        [Name("Image ID")]
+        [Name("Right Info")]
         public string image_id { get; set; }
+
+        [Name("Left Info")]
+        public string left_info { get; set; }
+
 
         [Name("Deviation(%)")]
         public string _deviation { get; set; }
