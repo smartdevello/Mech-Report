@@ -103,3 +103,4 @@ E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.As
 E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.CoreCompileInputs.cache
 E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.csproj.CopyComplete
 E:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.genruntimeconfig.cache
+D:\My Work\2021\8\Mech Report\Mech Report\obj\Debug\netcoreapp3.1\Mech Report.GeneratedMSBuildEditorConfig.editorconfig

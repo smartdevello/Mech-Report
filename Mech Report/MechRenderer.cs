@@ -29,6 +29,9 @@ namespace Mech_Report
         Image warningImg = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "warning.png"));
         Image red_fingerImg = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "red_finger.png"));
         Image yello_fingerImg = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "yellow_finger.png"));
+        Image magnify_glassImg = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "magnifying-glass.png"));
+
+        private Dictionary<int, Color> colorDic = null;
 
         public MechRenderer(int width, int height)
         {
@@ -67,6 +70,26 @@ namespace Mech_Report
             DF = data.Where(e => e.result == "DF").ToList();
             HF = data.Where(e => e.result == "HF").ToList();
             NF = data.Where(e => e.result != "MF" && e.result != "DF" && e.result != "HF").ToList();
+
+
+            colorDic = new Dictionary<int, Color>();
+            var sorted_printers = printers.OrderByDescending(o => o.Value);
+            int prev_cnt = 0;
+            Random rnd = new Random();
+
+
+            for (int i = 0; i < sorted_printers.Count(); i++)
+            {
+                if (sorted_printers.ElementAt(i).Value != prev_cnt)
+                {
+                    prev_cnt = sorted_printers.ElementAt(i).Value;
+                    if (!colorDic.ContainsKey(prev_cnt))
+                    {
+                        colorDic[prev_cnt] = System.Drawing.Color.FromArgb(rnd.Next(0, 200), rnd.Next(0, 200), rnd.Next(0, 200));
+                    }
+                }
+            }
+
 
         }
 
@@ -319,6 +342,29 @@ namespace Mech_Report
             }
             var sorted_recurring_printers = most_occuring_printers.OrderByDescending(o => o.Value);
 
+            int group_count_more5 = 0, count_more5 = 0;
+
+            Dictionary<int, int> dic_more5 = new Dictionary<int, int>();
+            for (int i = 0; i < sorted_printers.Count(); i++)
+            {
+                int key = sorted_printers.ElementAt(i).Value;
+
+                if (dic_more5.ContainsKey(key))
+                {
+                    dic_more5[key]++;
+                }
+                else dic_more5[key] = 1;
+            }
+            foreach (KeyValuePair<int, int> entry in dic_more5)
+            {
+                if (entry.Value >= 5)
+                {
+                    count_more5 += entry.Value;
+                    group_count_more5++;
+                }
+
+            }
+
 
             if (sorted_recurring_printers.Count() > 0)
             {
@@ -335,15 +381,23 @@ namespace Mech_Report
                     drawCenteredString(msg, new Rectangle(iconXcood + 100, 100, 170, 100), Brushes.Black, 10);
                     iconXcood += 300;
 
-                    percentage = sorted_recurring_printers.ElementAt(0).Value * 100 / (float)sorted_printers.Count();
-                    drawCenteredString(string.Format("{0}%", Math.Round(percentage, 0)), new Rectangle(iconXcood, 100, 150, 50), Brushes.Black, 27);
+                    drawImg(magnify_glassImg, new Point(iconXcood, 125), new Size(100, 90));
+                    drawCenteredString(group_count_more5.ToString(), new Rectangle(iconXcood-20, 110, 100, 50), Brushes.Red, 18);
 
-                    if (sorted_recurring_printers.Count() > 1)
-                    {
-                        percentage = sorted_recurring_printers.ElementAt(1).Value * 100 / (float)sorted_printers.Count();
-                        drawCenteredString(string.Format("/{0}%", Math.Round(percentage, 0)), new Rectangle(iconXcood, 50, 150, 50), Brushes.Black, 23);
-                    }
-                        
+                    int percent = (int)(count_more5 * 100 / sorted_printers.Count());
+
+                    drawCenteredString(percent.ToString() + "%", new Rectangle(iconXcood + 50, 110, 120, 50), Brushes.Red, 18);
+                    drawCenteredString("Measured\nRythms\nDETECTED", new Rectangle(iconXcood, 60, 120, 100), Brushes.Red, 12);
+
+                    //percentage = sorted_recurring_printers.ElementAt(0).Value * 100 / (float)sorted_printers.Count();
+                    //drawCenteredString(string.Format("{0}%", Math.Round(percentage, 0)), new Rectangle(iconXcood, 100, 150, 50), Brushes.Black, 27);
+
+                    //if (sorted_recurring_printers.Count() > 1)
+                    //{
+                    //    percentage = sorted_recurring_printers.ElementAt(1).Value * 100 / (float)sorted_printers.Count();
+                    //    drawCenteredString(string.Format("/{0}%", Math.Round(percentage, 0)), new Rectangle(iconXcood, 50, 150, 50), Brushes.Black, 23);
+                    //}
+
 
                 }
             }
@@ -357,35 +411,48 @@ namespace Mech_Report
 
 
             drawCenteredString("REPRESENTATION", new Rectangle(550, 930, 270 * Math.Min(gapCount, 5), 30), Brushes.Black);
-            msg = sorted_printers.Count().ToString();
-            if (gapCount > 5)
-            {
-                int currentPrinterCnt = Math.Min(sorted_printers.Count(), currentChartIndex * 85 + 85) - currentChartIndex * 85;
-                msg = string.Format("{0} of {1}", currentPrinterCnt, sorted_printers.Count());
-            }
 
-            drawCenteredString(msg, new Rectangle(550, 900, 270 * Math.Min(gapCount, 5), 100), Brushes.Red, 40);
+
+            //msg = sorted_printers.Count().ToString();
+            //if (gapCount > 5)
+            //{
+            //    int currentPrinterCnt = Math.Min(sorted_printers.Count(), currentChartIndex * 85 + 85) - currentChartIndex * 85;
+            //    msg = string.Format("{0} of {1}", currentPrinterCnt, sorted_printers.Count());
+            //}
+            int pageCnt = sorted_printers.Count() / 85;
+            if (sorted_printers.Count() % 85 != 0) pageCnt++;
+
+            msg = string.Format("{0} Precincts Reporting {1} of {2}", sorted_printers.Count(), currentChartIndex+1, pageCnt);
+            drawCenteredString(msg, new Rectangle(550, 900, 270 * Math.Min(gapCount, 5), 100), Brushes.Red, 30);
             drawCenteredString("HF ALERT-Precint", new Rectangle(620, 840, 200, 40), Brushes.Red, 13);
 
+
             int len = sorted_printers.Count();
+            int preValue = 0;
             for (int i = currentChartIndex * 85; i < Math.Min(sorted_printers.Count(), currentChartIndex * 85 + 85); i++)
             {
                 int j = i % 85;
-                drawString(new Point(620 + width_gap * (j / 17), 800 - height_gap * (j % 17)), sorted_printers.ElementAt(i).Key, 8);
-                percentage = sorted_printers.ElementAt(i).Value * 100 / (float)data.Count;
-
                 int count = sorted_printers.ElementAt(i).Value;
-                if (count == sorted_recurring_printers.ElementAt(0).Key)
+                if (count != preValue)
                 {
-                    drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), Color.Red);
-                } else if (sorted_recurring_printers.Count() >=2 && count == sorted_recurring_printers.ElementAt(1).Key)
-                {
-                    drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), Color.Aqua);
-                } else if (sorted_recurring_printers.Count()>=3 && count == sorted_recurring_printers.ElementAt(2).Key)
-                {
-                    drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), Color.Blue);
+                    preValue = count;
                 }
-                else drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), Color.Black);
+
+                drawString(colorDic[count],  new Point(620 + width_gap * (j / 17), 800 - height_gap * (j % 17)), sorted_printers.ElementAt(i).Key, 8);
+                percentage = sorted_printers.ElementAt(i).Value * 100 / (float)data.Count;
+                drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), colorDic[count]);
+
+                //if (count == sorted_recurring_printers.ElementAt(0).Key)
+                //{
+                //    drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), Color.Red);
+                //} else if (sorted_recurring_printers.Count() >=2 && count == sorted_recurring_printers.ElementAt(1).Key)
+                //{
+                //    drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), Color.Aqua);
+                //} else if (sorted_recurring_printers.Count()>=3 && count == sorted_recurring_printers.ElementAt(2).Key)
+                //{
+                //    drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), Color.Blue);
+                //}
+                //else drawPercentageLine(percentage, 790 + width_gap * (j / 17), 800 - height_gap * (j % 17), Color.Black);
             }
             drawCenteredString(data.Count().ToString(), new Rectangle(780 + width_gap * (Math.Min(gapCount, 5) - 1), 100, width_gap, 100), Brushes.Black, 40);
 
